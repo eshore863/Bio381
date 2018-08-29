@@ -1,0 +1,15 @@
+---
+title: "Test"
+author: "Emily Shore"
+date: "August 29, 2018"
+output: 
+  html_document: 
+    theme: cosmo
+---
+
+
+# My Homework
+
+###Hw1
+
+*[Homework 1](http://www.wikipedia.org)
