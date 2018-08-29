@@ -21,4 +21,32 @@ output:
 
 ###Hw3
 
-* [homework 3]
+* [homework 3](homework_3.html)
+
+###Hw4
+
+* [homework 4](homework_4.html)
+
+###Hw5
+
+* [homework 5](homework_5.html)
+
+###Hw6
+
+* [homework 6](homework_6.html)
+
+###Hw7
+
+* [homework 7](homework_7.html)
+
+###Hw8
+
+* [homework 8](homework_8.html)
+
+###Hw9
+
+* [homework 9](homework_9.html)
+
+###Hw10
+
+* [homework 10](homework_10.html)
