@@ -4,7 +4,7 @@ author: "Emily Shore"
 date: "August 29, 2018"
 output: 
   html_document: 
-    theme: cosmo
+    theme: sandstone
 ---
 
 
