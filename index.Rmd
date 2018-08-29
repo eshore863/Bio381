@@ -3,8 +3,9 @@ title: "Test"
 author: "Emily Shore"
 date: "August 29, 2018"
 output: 
-  html_document: 
-    theme: sandstone
+  prettydoc::html_pretty:
+    theme: cayman
+    highlight: github
 ---
 
 
