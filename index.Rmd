@@ -1,5 +1,5 @@
 ---
-title: "Test"
+title: "BIOL381"
 author: "Emily Shore"
 date: "August 29, 2018"
 output: 
@@ -13,4 +13,4 @@ output:
 
 ###Hw1
 
-*
+* [Homework 1](homework_1.html)
