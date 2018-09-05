@@ -7,4 +7,4 @@ output: html_document
 
 [flow chart](homework2diagram.html)
 
-[pre graph](pregraphs.JPG)
+[pre graphs](pregraphs.JPG)
