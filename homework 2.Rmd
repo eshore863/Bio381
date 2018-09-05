@@ -1,12 +1,8 @@
 ---
 title: "homework 2"
 author: "Emily Shore"
-date: "August 29, 2018"
+date: "September 5, 2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-*file:///C:/Users/Emily%20Shore/Desktop/homework%202%20tree.html*
+[flow chart](homework2tree.html)
