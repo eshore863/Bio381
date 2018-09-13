@@ -1,0 +1,57 @@
+---
+title: "Masters thesis on copepods"
+author: "Emily Shore"
+date: "September 12, 2018"
+output: 
+  beamer_presentation: 
+    colortheme: lily
+    fonttheme: structurebold
+    theme: Antibes
+---
+
+## Why this??
+
+My area of interest is the anthropogenic effects on the current oceanic systems, and how these increasing anthropogenic impacts will affect marine organisms in the future
+
+examples of this include but are not limited to...
+
+- \color{orange}Increased salinity
+- \color{pink}Climbing pH
+- \color {blue}Increased plastic particulates
+
+
+## Thesis statement/question
+
+ \begin{picture}(320,250)
+ \put(00,00){\includegraphics[height=8.5cm]{copepod_calanoid.JPG}}
+ \put(10,145){\begin{minipage}[t]{1\linewidth}{\color{blue}Does consuming micro particles of plastic have a measurable \\ effect on water column placement, swim rates, as well as sink \\ rates on the species \textit{Acartia tonsa}}
+ \end{minipage}}
+ \end{picture}
+ 
+
+
+## Possible outcomes
+> - \color{green}no plastic consumption
+> - \color{black}plastic consumption but no effect on rates
+> - \color{orange}plastic consumption and slower swim rates
+> - \color{red}plastic consumption and death within 1 hour
+
+
+
+## Consequences
+
+ \begin{picture}(320,250)
+ \put(65,20){\includegraphics[height=4cm]{plastic_copepod.JPG}}
+ \put(00,180){\begin{minipage}[t]{1\linewidth}{The consumption of these microplastics cause starvation, which surely have an effect on mortality rates in my experiment}
+ \end{minipage}}
+ \end{picture}
+ 
+## What I hope my results to resemble
+
+ \begin{picture}(320,250)
+ \put(70,45){\includegraphics[height=6.5cm]{pregraphs.JPG}}
+ \put(00,60){\begin{minipage}[t]{1\linewidth}
+ 
+ \end{minipage}}
+ \end{picture}
+ 
