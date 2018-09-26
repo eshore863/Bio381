@@ -1,0 +1,50 @@
+---
+title: "dplyr"
+author: "Emily Shore"
+date: "September 26, 2018"
+output: html_document
+---
+
+```{r, message=FALSE, warning=FALSE}
+
+library(dplyr)
+data(iris)
+glimpse(iris)
+
+#150 observations, 5 variables
+
+iris1 <- filter(iris, Species ==  c("virginica","versicolor"), Sepal.Length >6, Sepal.Width >2.5)
+glimpse(iris1)
+
+# 28 observations, 5 variables
+
+iris2 <- select(iris1, Species, Sepal.Length, Sepal.Width)
+glimpse(iris2)
+
+# 3 variables
+
+iris3 <- arrange(iris2, desc(Sepal.Length))
+head(iris3)
+
+iris4 <- mutate(iris3, sepalarea =  Sepal.Length * Sepal.Width)
+glimpse(iris4)
+
+# 4 variables, 28 observations
+
+iris5 <- summarize(iris4, mean_sepal_length = mean(Sepal.Length), mean_sepal_width = mean(Sepal.Width), n())
+print(iris5)
+
+groupspecies <- group_by(iris4,Species)
+iris6 <- summarize(groupspecies, mean_sepal_length = mean(Sepal.Length), mean_sepal_width = mean(Sepal.Width), n())
+
+print(iris6)
+
+iris %>% 
+  filter(Species ==  c("virginica","versicolor"), Sepal.Length >6, Sepal.Width >2.5) %>%
+  select(Species, Sepal.Length, Sepal.Width) %>%
+  arrange(desc(Sepal.Length)) %>%
+  mutate(sepalarea =  Sepal.Length * Sepal.Width) %>%
+  group_by(Species) %>%
+  summarize(mean_sepal_length = mean(Sepal.Length), mean_sepal_width = mean(Sepal.Width), n())
+  
+```
