@@ -33,7 +33,7 @@ output:
 
 ###Hw6
 
-* [homework 6](homework_6.html)
+* [homework 6](homework6.html)
 
 ###Hw7
 
