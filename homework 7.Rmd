@@ -1,30 +1,178 @@
 ---
-title: "homework 7"
+title: "Homework 7"
 author: "Emily Shore"
-date: "August 29, 2018"
+date: "October 10, 2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+##Random Data Set
+```{r}
+library(tidyverse)
+numbs <- 100
+```
+####Control jump length before microscope consumption
+```{r}
+CopejumpC <- rnorm(n=numbs,mean=20,sd=4)
+```
+####Variable jump length after microplastic consumption
+```{r}
+CopejumpV <- rnorm(n=numbs,mean=17,sd=4)
+
+ID <- seq_len(numbs)
+dataset <- data.frame(ID,CopejumpC,CopejumpV)
+print(dataset)
+```
+#### In choosing sample size, because alot of the copepods we work are very genetically similar, it is important to have a large sample size to try and counteract any lack of genetic variation. Means were determiend by reading a paper of average copepod jump length in mm, and then hypothesizing that the effect of microplastic consumption would have on the mean jump length. The standard deviation was a shot in the dark, becuase I honestly don't know what the effect of microplastic consumption will have on the copepods. 
+
+## ANOVA analysis
+```{r}
+nControl <- c("Control")
+nTreatment <- c("Treatment")
+
+TreatVec <- c(rep(nControl,numbs), rep(nTreatment,numbs))
+head(TreatVec)
+
+JumpLength <- c(CopejumpC,CopejumpV)
+print(JumpLength)
+
+ANOdata <- data.frame(ID,TreatVec,JumpLength)
+head(ANOdata)
+
+ANOmodel <- aov(JumpLength~TreatVec,data=ANOdata)
+print(ANOmodel)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=ANOdata,
+                  aes(x=TreatVec,y=JumpLength,
+                      fill=TreatVec)) +
+  geom_boxplot()
+print(ANOPlot)
 ```
 
-## R Markdown
+### Running the analysis multiple times changes the P value, but all trials produced a significant P value, changing only slightly. 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+## After changing the mean values
+```{r}
+library(tidyverse)
+## Control jump length before microscope consumption
+CopejumpC <- rnorm(n=numbs,mean=18,sd=4)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Variable jump length after microplastic consumption
+CopejumpV <- rnorm(n=numbs,mean=16,sd=4)
 
-```{r cars}
-summary(cars)
+ID <- seq_len(numbs)
+dataset <- data.frame(ID,CopejumpC,CopejumpV)
+print(dataset)
+
+## ANOVA analysis
+nControl <- c("Control")
+nTreatment <- c("Treatment")
+
+TreatVec <- c(rep(nControl,numbs), rep(nTreatment,numbs))
+head(TreatVec)
+
+JumpLength <- c(CopejumpC,CopejumpV)
+print(JumpLength)
+
+ANOdata <- data.frame(ID,TreatVec,JumpLength)
+head(ANOdata)
+
+ANOmodel <- aov(JumpLength~TreatVec,data=ANOdata)
+print(ANOmodel)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=ANOdata,
+                  aes(x=TreatVec,y=JumpLength,
+                      fill=TreatVec)) +
+  geom_boxplot()
+print(ANOPlot)
 ```
 
-## Including Plots
+### I decreased the mean values for both control and treatment groups, as well as decreased the difference between the two. I found that the P value was extremely less significant than the original means, although it is still statistically significant
+```{r}
+library(tidyverse)
+numbs <- 24
 
-You can also embed plots, for example:
+####Control jump length before microscope consumption
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+CopejumpC <- rnorm(n=numbs,mean=20,sd=4)
+
+####Variable jump length after microplastic consumption
+
+CopejumpV <- rnorm(n=numbs,mean=17,sd=4)
+
+ID <- seq_len(numbs)
+dataset <- data.frame(ID,CopejumpC,CopejumpV)
+print(dataset)
+
+## ANOVA analysis
+
+nControl <- c("Control")
+nTreatment <- c("Treatment")
+
+TreatVec <- c(rep(nControl,numbs), rep(nTreatment,numbs))
+head(TreatVec)
+
+JumpLength <- c(CopejumpC,CopejumpV)
+print(JumpLength)
+
+ANOdata <- data.frame(ID,TreatVec,JumpLength)
+head(ANOdata)
+
+ANOmodel <- aov(JumpLength~TreatVec,data=ANOdata)
+print(ANOmodel)
+summary(ANOmodel)
+
+ANOPlot <- ggplot(data=ANOdata,
+                  aes(x=TreatVec,y=JumpLength,
+                      fill=TreatVec)) +
+  geom_boxplot()
+print(ANOPlot)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### With changing the sample size, the minimum sample size required for a significantly significant value was 24 individuals for each of the control and treatment groups. This is a big drop from 100 to 24 individuals. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
