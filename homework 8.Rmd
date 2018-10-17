@@ -1,30 +1,127 @@
 ---
 title: "homework 8"
 author: "Emily Shore"
-date: "August 29, 2018"
+date: "October 17, 2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+#Global
+library(tidyverse)
+numbs <- 100
+##################
+# FUNCTION: Get Data
+# INPUTS: mean and standard deviation, all numeric values
+# OUTPUTS: data frame with 3 columns, ID, treatment type, measurements
+#----------------------------
+getData <- function(n1=numbs,mean1=20,sd1=4,mean2=17,sd2=4){
+
+CopejumpC <- rnorm(n=n1,mean=mean1,sd=sd1)
+CopejumpV <- rnorm(n=n1,mean=mean2,sd=sd2)
+
+nControl <- c("Control")
+nTreatment <- c("Treatment")
+
+TreatVec <- c(rep(nControl,n1), rep(nTreatment,n1))
+
+
+JumpLength <- c(CopejumpC,CopejumpV)
+print(JumpLength)
+
+ID <- seq_len(n1)
+
+CopeData <- data.frame(ID,TreatVec,JumpLength)
+
+return(CopeData)
+}
+#---------------------------
+getData()
+
+##################
+# FUNCTION: Anova Analysis
+# INPUTS: x and y vectors of numeric
+# OUTPUTS: A box plot of dataSet
+# this function runs an Anova
+#----------------------------
+AnovaAnalysis <- function(x=data$TreatVec, y=data$JumpLength,data=getData()){
+
+ANOmodel <- aov(y~x,data=data)
+
+ANOPlot <- ggplot(data=data,
+                  aes(x=x,y=y,
+                      fill=x)) +
+  geom_boxplot()
+
+return(print(ANOPlot))
+}
+#---------------------------
+AnovaAnalysis()
+
+##################
+# FUNCTION: Statistical summary
+# INPUTS:
+# OUTPUTS: 
+#----------------------------
+AnovaSummary <- function(x=data$TreatVec, y=data$JumpLength,data=getData()){
+
+ANOmodel <- aov(y~x,data=data)
+
+ANOPlot <- ggplot(data=data,
+                  aes(x=x,y=y,
+                      fill=x)) +
+  geom_boxplot()
+
+return(summary(ANOmodel))
+}
+
+#---------------------------------------------------
+AnovaSummary()
+
+# Changed means 
+getData1 <- getData(n1=numbs,mean1=18,sd1=4,mean2=16,sd2=4)
+AnovaAnalysis1 <- AnovaAnalysis(data=getData1)
+AnovaSummary1 <- AnovaSummary(data=getData1)
+
+#----------------------------------------------------
+# Changed Sample Size
+getData2 <- getData(n1=24,mean1=18,sd1=4,mean2=16,sd2=4)
+AnovaAnalysis2 <- AnovaAnalysis(data=getData1)
+AnovaAnalysis2 <- AnovaSummary(data=getData1)
+
+#----------------------------------------------------
+# Making a new output graph
+
+##################
+# FUNCTION: Histogram
+# INPUTS: x and y vectors of numeric
+# OUTPUTS: A histogram of dataSet
+# this function runs a histogram
+#----------------------------
+HistPlotAnalysis <- function(x= data$JumpLength, data=getData()){
+
+HistPlot<- ggplot(data=data,
+                  aes(x=x,
+                      fill=x)) +
+  geom_histogram()
+
+return(print(HistPlot))
+}
+#---------------------------
+HistPlotAnalysis()
+
+
+
 ```
 
-## R Markdown
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
-```
 
-## Including Plots
 
-You can also embed plots, for example:
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+
+
+
