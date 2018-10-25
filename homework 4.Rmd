@@ -5,26 +5,139 @@ date: "August 29, 2018"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+##1.
+```{r}
+x <- 1.1
+a <- 2.2
+b <- 3.3
+
+#a.
+x^a^b
+#b.
+(x^a)^b
+#c.
+3*(x^3)+2*(x^2)+1
+
+##2.
+
+#a.
+myvec <- c(1,2,3,4,5,6,7,8)
+seq(myvec)
+c(myvec,rep(7),rep(6),rep(5),rep(4),rep(3),rep(2),rep(1))
+
+#b.
+myvec2 <- c(1,2,3,4,5)
+c(rep(1,1),rep(2,2),rep(3,3),rep(4,4),rep(5,5))
+
+#c.
+myvec3 <- c(5,4,3,2,1)
+c(rep(5,1),rep(4,2),rep(3,3),rep(2,4),rep(1,5))
+
+##3.
+
+runif(1)
+runif(2)
+x <- runif(1)
+y <- runif(2)
+x <- .4402866
+y <- .6959061
+sqrt((x^2)+(y^2))
+atan(y/x)
+
+##4.
+
+queue <- c("sheep","fox","owl","ant")
+print(queue)
+queue <- c(queue,"serpent")
+print(queue)
+queue <- queue[2:5]
+print(queue)
+queue <- c("donkey",queue)
+print(queue)
+queue <- queue[1:4]
+print(queue)
+queue <- c(queue[1:2],queue[4])
+print(queue)
+queue <- c(queue[1:2],"aphid",queue[3])
+print(queue)
+queue[3]
+
+##5.
+
+Filter(function(i){all(i %% c(2,3,7)!=0)}, seq(100))
+
+##6.
+
+#First String    Second      1.22      3.4
+#Second          More Text   1.555555  2.2220
+#Third           x           3         124
+
+#Find: \s
+#Replace: ,
+
+#First,String,Second,1.22,3.4     
+#Second,More Text,1.555555,2.2220     
+#Third,x,3,124  
+
+##7.
+
+#Ballif, Bryan, University of Vermont
+#Ellison, Aaron, Harvard Forest
+#Record, Sydne, Bryn Mawr
+
+#Find: (\w+), (\w+), (.*)
+#Replace: \2 \1 (\3)
+
+#Bryan Ballif (University of Vermont)
+#Aaron Ellison (Harvard Forest)
+#Sydne Record (Bryn Mawr)
+
+##8.
+
+#0001 Georgia Horseshoe.mp3 0002 Billy In The Lowground.mp3 0003 Cherokee Shuffle.mp3 0004 Walking Cane.mp3
+
+#Find:.mp3\s
+#Replace:.mp3\n
+
+#0001 Georgia Horseshoe.mp3
+#0002 Billy In The Lowground.mp3
+#0003 Cherokee Shuffle.mp3
+#0004 Walking Cane.mp3
+
+#Find:(\d{4}) (\w.*).mp3
+#Replace: \2_\1.mp3  
+
+#Georgia Horseshoe_0001.mp3
+#Billy In The Lowground_0002.mp3
+#Cherokee Shuffle_0003.mp3
+#Walking Cane_0004.mp3
+
+##9.
+
+#Camponotus,pennsylvanicus,10.2,44
+#Camponotus,herculeanus,10.5,3
+#Myrmica,punctiventris,12.2,4
+#Lasius,neoniger,3.3,55
+
+#Find:(\w)(\w+),(\w+),.+,(.+)
+#Replace:\1_\3,\4
+
+#C_pennsylvanicus,44
+#C_herculeanus,3
+#M_punctiventris,4
+#L_neoniger,55
+
+#Camponotus,pennsylvanicus,10.2,44
+#Camponotus,herculeanus,10.5,3
+#Myrmica,punctiventris,12.2,4
+#Lasius,neoniger,3.3,55
+
+#Find:(\w)(\w+),(\w{4})(\w+),(.+),(.+)
+#Replace:\1_\3,\6
+
+#C_penn,44
+#C_herc,3
+#M_punc,4
+#L_neon,55
+
 ```
-
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
