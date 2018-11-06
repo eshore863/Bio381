@@ -5,6 +5,6 @@ date: "September 5, 2018"
 output: html_document
 ---
 
-[flow chart](homework2diagram.html)
+[flow chart](tree.html)
 
 [pre graphs](pregraphs.JPG)
