@@ -1,0 +1,180 @@
+---
+title: "Homework 10"
+author: "Emily Shore"
+date: "October 31, 2018"
+output: html_document
+---
+
+```{r}
+
+#1
+
+####################
+# Function: Zeros in numeric vector
+# Inputs: random numeric vector
+# Output: counted number of zeros
+###################
+z <- sample(0:10,100, replace=TRUE)
+
+zeroVec <- function(Vec=z){
+counter <- 0
+for (i in seq_along(Vec)) {
+  if(Vec[i]==0) counter <- counter+1
+}
+return(counter)
+}
+####################
+zeroVec()
+
+#2
+
+z <- sample(0:10,100, replace=TRUE)
+zsub <- z[z==0]
+z
+length(zsub)
+
+#3
+
+#######################
+# Function: create matrix
+# Input: two intergers representing number of rows and columns in a matrix
+# Outputs: matrix of dimentions; each element is the product of the row number x the column number
+#######################
+createMatrix <- function(n=4,m=5){
+  mat <- matrix(nrow=n,ncol=m)
+
+for(i in 1:nrow(mat)){
+  for (j in 1:ncol(mat)){
+    mat[i,j] <- i*j
+  }
+ }
+  return(mat)
+   
+}
+createMatrix()
+#######################
+
+#4
+
+library(ggplot2)
+library(TeachingDemos)
+char2seed("RainyDay")
+###########################
+# Function: Load data
+# Input: data set csv
+# Output: data frame
+##########################
+readData <-  function(df=1){
+df <- read.table(file="wolves.csv",header=TRUE,sep=",")
+  
+  return(df)
+} 
+readData()
+#########################
+
+
+#########################
+# Function: calculate the metric
+# Input: data frame
+# Output: slope metric
+#########################
+df1 <- readData()
+getMetric <- function(df=df1){
+  names(df) <- c("x","y")
+. <- lm(df$y~df$x)
+. <- summary(.)
+. <- .$coefficients[2,1]
+slope <- .
+return(slope)
+  }
+getMetric()  
+#########################
+
+
+#########################
+# Function: create the randomization
+# Input: data frame
+# Output: shuffled data
+########################
+df1 <- readData()
+shuffleData <- function(df=df1){
+  names(df) <- c("x","y")
+  df$y <- sample(df$y)
+
+return(df)
+}
+shuffleData()
+########################
+
+
+########################
+# Function: Calculate P val
+# Input: 
+# Output: Probability of getting our value 
+###########################
+getPval <- function(z=NULL) {
+  if(is.null(z)){
+    z <- list(xObs=runif(1), xSim=runif(1000))}
+  pLower <- mean(z[[2]] <=z[[1]])
+  pUpper <- mean(z[[2]]>=z[[1]])
+  return(c(pLower,pUpper))
+} 
+getPval()
+##########################
+
+#5
+
+##########################
+# function: plotRanTest
+# create ggplot of histogram of simulated values
+# input: list of observed metric and vector of simulated metrics
+# output: saved ggplot graph
+#########################
+plotRanTest <- function(z=NULL) {
+  if(is.null(z)){
+    z <- list(rnorm(1),rnorm(1000)) }
+  dF <- data.frame(ID=seq_along(z[[2]]),simX=z[[2]])
+  p1 <- ggplot(data=dF,mapping=aes(x=simX))
+  p1 + geom_histogram(mapping=aes(fill=I("goldenrod"),color=I("black"))) +
+    geom_vline(aes(xintercept=z[[1]],col="blue")) 
+  
+}
+###################################3
+
+# now use functions to do the work
+nSim <- 1000
+Xsim <- rep(NA,nSim) # vector of simulated slopes
+df <- readData()
+Xobs <- getMetric(df) # finding the slope of our data
+
+for (i in seq_len(nSim)) {
+  Xsim[i] <- getMetric(shuffleData(df))
+}
+
+slopes <- list(Xobs,Xsim)
+getPval(slopes)
+
+plotRanTest(slopes)
+
+summary(lm(df$pups~df$inbreeding))
+
+# According to the p value calculated, there is a persistent difference in the p value of the standard test versus your randomization. There is a differene in the p values because one of the data sets was simmulated randomly, and had little coorelation to the actual set of wolf data that I input into R, showing that my data has a coorelation between inbreeding and pups. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```

@@ -1,7 +1,7 @@
 ---
 title: "homework 3"
 author: "Emily Shore"
-date: "August 29, 2018"
+date: "September 12, 2018"
 output: html_document
 ---
 
