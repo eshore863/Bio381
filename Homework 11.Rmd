@@ -1,0 +1,27 @@
+---
+title: "Homework 11"
+author: "Emily Shore"
+date: "November 7, 2018"
+output: html_document
+---
+
+```{r}
+install.packages("devtools")
+devtools::install_github("thomasp85/patchwork")
+library(patchwork)
+install.packages("Rcpp")
+
+library(ggplot2)
+p1 <- qplot(mtcars$mpg, mtcars$disp)
+p2 <- qplot(mtcars$mpg, mtcars$wt)
+p1 + p2 
+
+install.packages("colorspace", repos = "http://R-Forge.R-project.org")
+devtools::install_github("wilkelab/cowplot")
+devtools::install_github("clauswilke/colorblindr")
+
+library(colorblindr) 
+library(colorspace)
+library(cowplot)
+
+```
