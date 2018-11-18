@@ -1,0 +1,83 @@
+---
+title: "Sunburst"
+author: "Emily Shore"
+date: "November 18, 2018"
+output: html_document
+---
+
+```{r}
+# Installations
+devtools::install_github("cpsievert/XML2R")
+devtools::install_github("cpsievert/pitchRx")
+devtools::install_github("timelyportfolio/sunburstR")
+install.packages("dplyr")
+install.packages("tidyr")
+install.packages("stringr")
+install.packages("rvest")
+
+# Libraries
+library(ggplot2)
+library(sunburstR)
+library(pitchRx)
+library(dplyr)
+library(magritter)
+
+# Get all data from 2016-08-25
+data <- scrape(start = "2016-08-25", end = "2016-08-25")
+
+# This code uses runner data to get idea of game action with a runner on base
+action <- data$runner %>%
+  group_by(event_num) %>%
+  filter(row_number() == 1) %>%
+  ungroup() %>%
+  group_by(gameday_link, inning, inning_side) %>%
+  summarize(event = paste(c(event),collapse="-"))
+
+sequences <- action %>%
+  ungroup() %>%
+  group_by(event) %>%
+  summarize(count =n())
+
+# This groups the data into a hierarchy of sequential events so sunburst can sort the actions into descending order of depth
+sequences$depth <- unlist(lapply(strsplit(sequences$event,"-"),length))
+
+# Creating the Sunburst
+sb <- sequences %>%
+  arrange(desc(depth),event) %>%
+  sunburst()
+
+print(sb)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
