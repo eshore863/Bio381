@@ -6,21 +6,22 @@ output: html_document
 ---
 
 ```{r}
+
 # Installations
-devtools::install_github("cpsievert/XML2R")
-devtools::install_github("cpsievert/pitchRx")
-devtools::install_github("timelyportfolio/sunburstR")
-install.packages("dplyr")
-install.packages("tidyr")
-install.packages("stringr")
-install.packages("rvest")
+# devtools::install_github("cpsievert/XML2R")
+# devtools::install_github("cpsievert/pitchRx")
+# devtools::install_github("timelyportfolio/sunburstR")
+# install.packages("dplyr")
+# install.packages("tidyr")
+# install.packages("stringr")
+# install.packages("rvest")
 
 # Libraries
 library(ggplot2)
 library(sunburstR)
 library(pitchRx)
 library(dplyr)
-library(magritter)
+library(magrittr)
 
 # Get all data from 2016-08-25
 data <- scrape(start = "2016-08-25", end = "2016-08-25")
