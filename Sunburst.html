@@ -11,7 +11,7 @@
 
 <meta name="author" content="Emily Shore" />
 
-<meta name="date" content="2018-11-18" />
+<meta name="date" content="2018-11-29" />
 
 <title>Sunburst</title>
 
@@ -124,24 +124,20 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Sunburst</h1>
 <h4 class="author"><em>Emily Shore</em></h4>
-<h4 class="date"><em>November 18, 2018</em></h4>
+<h4 class="date"><em>November 29, 2018</em></h4>
 
 </div>
 
 
-<pre class="r"><code># Installations
-# devtools::install_github(&quot;cpsievert/XML2R&quot;)
-# devtools::install_github(&quot;cpsievert/pitchRx&quot;)
-# devtools::install_github(&quot;timelyportfolio/sunburstR&quot;)
-# install.packages(&quot;dplyr&quot;)
-# install.packages(&quot;tidyr&quot;)
-# install.packages(&quot;stringr&quot;)
-# install.packages(&quot;rvest&quot;)
+<pre class="r"><code># Sunburst
+# November 29, 2018
+# EAS
 
-# Libraries
+# Sunburst is a great way to summarize and view observational data not based on numbers. It tracks and graphs patterns in an interactive graph that allows you to further plan out your experimental approaches
+
 library(ggplot2)
 library(sunburstR)
-library(pitchRx)
+library(magrittr)
 library(dplyr)</code></pre>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
@@ -151,87 +147,48 @@ library(dplyr)</code></pre>
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(magrittr)
+<pre class="r"><code># First input your data into R from a csv file
 
-# Get all data from 2016-08-25
-data &lt;- scrape(start = &quot;2016-08-25&quot;, end = &quot;2016-08-25&quot;)</code></pre>
-<pre><code>## If file names don't print right away, please be patient.</code></pre>
-<pre><code>## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
+data &lt;- read.csv('mydata.csv', 'header'=TRUE, 'colClasses'=c('integer','character'))
 
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
+head(data)</code></pre>
+<pre><code>##   Time_tag Response
+## 1       50      top
+## 2       50  present
+## 3       50     slow
+## 4       50     dead
+## 5       51      top
+## 6       51   absent</code></pre>
+<pre class="r"><code>typeof(data)</code></pre>
+<pre><code>## [1] &quot;list&quot;</code></pre>
+<pre class="r"><code># Data is in the form of a list, displaying your charachter observations at the allotted time points
 
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
-
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
-
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
-
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
-
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
-
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
-
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
-
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.
-
-## Warning: `url_ok(x)` is deprecated; please use `identical(status_code(x),
-## 200L)` instead.</code></pre>
-<pre><code>## No encoding supplied: defaulting to UTF-8.</code></pre>
-<pre><code>## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.
-## No encoding supplied: defaulting to UTF-8.</code></pre>
-<pre><code>## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_bosmlb_tbamlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_detmlb_minmlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_balmlb_wasmlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_anamlb_tormlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_kcamlb_miamlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_nynmlb_slnmlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_clemlb_texmlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_pitmlb_milmlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_seamlb_chamlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_atlmlb_arimlb_1/inning/inning_all.xml 
-## http://gd2.mlb.com/components/game/mlb/year_2016/month_08/day_25/gid_2016_08_25_sfnmlb_lanmlb_1/inning/inning_all.xml</code></pre>
-<pre class="r"><code># This code uses runner data to get idea of game action with a runner on base
-action &lt;- data$runner %&gt;%
-  group_by(event_num) %&gt;%
-  filter(row_number() == 1) %&gt;%
-  ungroup() %&gt;%
-  group_by(gameday_link, inning, inning_side) %&gt;%
-  summarize(event = paste(c(event),collapse=&quot;-&quot;))
+action &lt;- data %&gt;%
+  group_by(Time_tag) %&gt;%
+  #filter(row_number() == 1) %&gt;% #
+  #ungroup() %&gt;% #
+  
+  summarize(Response = paste(c(Response),collapse=&quot;-&quot;)) # results in length 1 charachter vector
 
 sequences &lt;- action %&gt;%
   ungroup() %&gt;%
-  group_by(event) %&gt;%
+  group_by(Response) %&gt;%
   summarize(count =n())
 
-# This groups the data into a hierarchy of sequential events so sunburst can sort the actions into descending order of depth
-sequences$depth &lt;- unlist(lapply(strsplit(sequences$event,&quot;-&quot;),length))
+sequences$depth &lt;- unlist(lapply(strsplit(sequences$Response,&quot;-&quot;),length))
 
-# Creating the Sunburst
+#lapply returns a list of the same length as X, so we worked with our times before, now were working with our responses
+
+#strsplit splits the elements of our charachter vector into substrings according to the matches between our times and the responses
+
 sb &lt;- sequences %&gt;%
-  arrange(desc(depth),event) %&gt;%
-  sunburst()
+  arrange(desc(depth),Response) %&gt;%
+  sunburst(count=TRUE)
+print(sb)
 
-print(sb)</code></pre>
+# for this data set, there are 29 observations recorded in 9 time slots
+# The 8 means that there are 8 different combinations of observations in our data.
+# for example, in the upper right of the sunburst with the sequence of absent, bottom, dead, 1 of 8 or 12.5% of the combinations had all three of these observations</code></pre>
 
 
 

@@ -24,4 +24,8 @@ library(colorblindr)
 library(colorspace)
 library(cowplot)
 
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+BiocManager::install("Sushi", version = "3.8")
+
 ```
