@@ -20,7 +20,7 @@ library(dplyr)
 
 # First input your data into R from a csv file
 
-data <- read.csv('mydata.csv', 'header'=TRUE, 'colClasses'=c('integer','character'))
+data <- read.csv('sunburstData.csv', 'header'=TRUE, 'colClasses'=c('integer','character'))
 
 head(data)
 typeof(data)
