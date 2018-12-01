@@ -6,26 +6,74 @@ output: html_document
 ---
 
 ```{r}
-install.packages("devtools")
-devtools::install_github("thomasp85/patchwork")
-library(patchwork)
-install.packages("Rcpp")
+#install.packages("devtools")
+#devtools::install_github("thomasp85/patchwork")
+#library(patchwork)
+#install.packages("Rcpp")
+
+#install.packages("colorspace", repos = "http://R-Forge.R-project.org")
+#devtools::install_github("wilkelab/cowplot")
+#devtools::install_github("clauswilke/colorblindr")
 
 library(ggplot2)
-p1 <- qplot(mtcars$mpg, mtcars$disp)
-p2 <- qplot(mtcars$mpg, mtcars$wt)
-p1 + p2 
-
-install.packages("colorspace", repos = "http://R-Forge.R-project.org")
-devtools::install_github("wilkelab/cowplot")
-devtools::install_github("clauswilke/colorblindr")
-
-library(colorblindr) 
 library(colorspace)
 library(cowplot)
 
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-BiocManager::install("Sushi", version = "3.8")
+# Regular Plots
+chickwts
+
+d <- chickwts
+
+p1 <- ggplot(data=d, mapping=aes(x=feed,fill=I("royalblue"), color=I("black"))) + geom_bar()
+p1
+
+p2 <- ggplot(data=d, mapping=aes(x=feed, y=weight)) + geom_point() + geom_smooth()
+p2
+
+p3 <- ggplot(data=d,mapping=aes(x=feed, y=weight, fill=I("tomato"))) + geom_boxplot() 
+p3
+
+# Experimenting with placement
+# for some reason it wouldn't plot the graphs side by side, but here is my code
+#p1 + p3
+
+#(p2 | p1)/p3
+
+rock
+
+d2 <- rock
+head(rock)
+
+f1 <- ggplot(data=d2,(mapping=aes(x=shape,y=area,color=perm))) + geom_point()
+f1
+
+f2 <- ggplot(data=d2,(mapping=aes(x=shape,y=area, color=peri))) + geom_point()
+f2
+
+f3 <- ggplot(data=d2,mapping=aes(x=peri,fill=I("red"),color=I("royalblue"))) + geom_histogram()
+f3
+
+# Again I was getting an error with adding the graphs together and knitting, but here is my code
+#f2 + f3
+
+#(f2 | f1)/f3
+             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ```

@@ -18,7 +18,7 @@ library(sunburstR)
 library(magrittr)
 library(dplyr)
 
-# First input your data into R from a csv file
+# First input your data into R from a csv file or data frame
 
 data <- read.csv('sunburstData.csv', 'header'=TRUE, 'colClasses'=c('integer','character'))
 
